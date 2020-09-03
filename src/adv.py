@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,10 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player("Nodnarb", room['outside'])
+
+print(player.room.name)
+
 
 # Write a loop that:
 #
@@ -49,3 +54,35 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    print(
+        "Your current room:", "\n",
+        player.room.name, "\n",
+        player.room.description
+    )
+
+    direction = input("Input a direction: ")
+
+    if direction.lower() == 'q':
+        break
+    elif direction.lower() == 'n':
+        if hasattr(player.room, "n_to"):
+            player.room = player.room.n_to
+        else:
+            print(f"A ROOM DOES NOT EXIST IN THAT DIRECTION ({direction}).")
+    elif direction.lower() == 's':
+        if hasattr(player.room, "s_to"):
+            player.room = player.room.s_to
+        else:
+            print(f"A ROOM DOES NOT EXIST IN THAT DIRECTION ({direction}).")
+    elif direction.lower() == 'e':
+        if hasattr(player.room, "e_to"):
+            player.room = player.room.e_to
+        else:
+            print(f"A ROOM DOES NOT EXIST IN THAT DIRECTION ({direction}).")
+    elif direction.lower() == 'w':
+        if hasattr(player.room, "w_to"):
+            player.room = player.room.w_to
+        else:
+            print(f"A ROOM DOES NOT EXIST IN THAT DIRECTION ({direction}).")
